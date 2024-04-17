@@ -1,0 +1,754 @@
+@use "partials/allscss" as *;
+
+.sub-heading {
+  border: $border;
+
+  .sub-heading-content {
+    @include sm {
+      display: block;
+      width: 90%;
+    }
+
+    @include md {
+      width: 90%;
+    }
+  }
+
+  &-content {
+    width: 80%;
+    margin: 0em auto;
+    @include displayFlex(row, space-between, center, 0rem);
+
+    .email-phone-container {
+      @include displayFlex(row, normal, normal, 1rem);
+      font-weight: map-get($font-weight, "light");
+      letter-spacing: $letter-spacing;
+      color: $clr-black2;
+      .email,
+      .phone {
+        padding-left: 1em;
+        padding: 1em 0em;
+      }
+
+      .phone {
+        padding-left: 1em;
+        border-left: $border;
+      }
+
+      @include sm {
+        display: none;
+      }
+    }
+
+    .social-login-container {
+      @include displayFlex(row, normal, normal, 0rem);
+
+      .social {
+        padding: 1em;
+        border-left: $border;
+
+        ul {
+          display: flex;
+          gap: 1rem;
+        }
+
+        @include sm {
+          display: none;
+        }
+      }
+
+      .login {
+        padding-top: 1em;
+        padding-left: 1em;
+        border-left: $border;
+
+        @include sm {
+          display: inline-block;
+          padding: 0.5em;
+          border-left: $border;
+        }
+      }
+
+      @include sm {
+        display: block;
+        text-align: right;
+      }
+    }
+  }
+}
+
+// ------------------------- || HEADER
+.header-content {
+  .logo-searchbar-buttons-container {
+    width: 80%;
+    margin: $sections-gap auto 0em;
+    color: $clr-black2;
+    @include displayFlex(row, space-between, center, 0rem);
+
+    .logo {
+      @include sm {
+        text-align: center;
+      }
+    }
+
+    .categories-search-container {
+      border: $border;
+      @include displayFlex(row, normal, normal, 0rem);
+
+      .categories-btn {
+        button {
+          border: 0;
+          outline: 0;
+          background-color: white;
+          cursor: pointer;
+          font-size: $default-fsize;
+          padding: 1em;
+          letter-spacing: $letter-spacing;
+
+          > i {
+            margin-left: 3em;
+
+            @include md {
+              margin-left: 0;
+            }
+
+            @include lg {
+              margin-left: 0.5em;
+            }
+          }
+        }
+
+        @include sm {
+          display: none;
+        }
+      }
+
+      .searchbar {
+        position: relative;
+
+        input[type="search"] {
+          border: 0;
+          border-left: $border;
+          outline: 0;
+          width: 25em;
+          padding: 1em 4em 1em 1em;
+          color: $clr-white2;
+          font-size: $default-fsize;
+
+          &:focus {
+            color: $clr-white2;
+            font-size: $default-fsize;
+          }
+
+          &::-webkit-input-placeholder {
+            font-size: $default-fsize;
+            letter-spacing: $letter-spacing;
+          }
+
+          &::-webkit-search-cancel-button {
+            display: none;
+          }
+
+          @include sm {
+            width: auto;
+          }
+
+          @include md {
+            width: auto;
+          }
+        }
+
+        .search-icon {
+          position: absolute;
+          padding: 1em;
+          background-color: $clr-yellow;
+          right: 0;
+          top: 0;
+          color: $clr-white1;
+        }
+      }
+
+      @include sm {
+        display: block;
+      }
+    }
+
+    .nav-right {
+      > ul {
+        @include displayFlex(row, normal, center, 1.2rem);
+
+        li > a {
+          position: relative;
+
+          i + span {
+            position: absolute;
+            top: -1em;
+            right: -0.7em;
+            font-size: 0.7rem;
+            color: $clr-white1;
+            background-color: $clr-yellow;
+            padding: 0.3em;
+            border-radius: $border-radius + 12px;
+            text-align: center;
+          }
+        }
+
+        li:nth-child(2) {
+          position: relative;
+
+          .bag-dropdown {
+            width: 21em;
+            @include displayFlex(column, normal, normal, 1.5rem);
+            background: $clr-white1;
+            padding: 2em;
+            position: absolute;
+            top: 3em;
+            left: -15.5em;
+            z-index: 9999;
+            @include dropdownTransition(hidden, 0, 1em);
+            transition: $transition;
+            box-shadow: $box-shadow-1;
+
+            .bag-items-container {
+              @include displayFlex(column, normal, normal, 1rem);
+
+              .bag-item {
+                @include displayFlex(row, normal, normal, 1rem);
+                position: relative;
+
+                .name-price {
+                  align-self: center;
+
+                  .price {
+                    font-size: $lg-fsize;
+                    color: $clr-yellow;
+                    font-weight: map-get($font-weight, "light");
+                  }
+
+                  .name {
+                    margin-top: 1em;
+                    color: $clr-black3;
+                  }
+                }
+
+                &:nth-child(2) {
+                  padding-bottom: 1em;
+                  border-bottom: $border;
+                }
+
+                i {
+                  position: absolute;
+                  top: 2em;
+                  right: 0;
+                }
+              }
+            }
+
+            .total {
+              @include displayFlex(row, space-between, normal, 0rem);
+
+              span {
+                color: $clr-yellow;
+                font-weight: map-get($font-weight, "light");
+              }
+            }
+
+            .buttons {
+              @include displayFlex(column, normal, normal, 0.5rem);
+              margin-top: 2em;
+
+              .btn {
+                text-align: center;
+                padding: 1em 0;
+
+                &:first-child > a {
+                  @include primary-btn($sm-fsize, $clr-black3, 1em 6em);
+                }
+
+                &:last-child > a {
+                  @include primary-btn($sm-fsize, $clr-yellow, 1em 6em);
+                }
+              }
+            }
+
+            @include sm {
+              top: 2em;
+              left: -2.2em;
+              padding: 1em;
+              width: 100vw;
+              max-width: 360px;
+            }
+          }
+
+          &:hover .bag-dropdown {
+            @include dropdownTransition(visible, 1, 0em);
+          }
+        }
+
+        @include sm {
+          gap: 1rem;
+        }
+      }
+
+      li:nth-child(3) > span {
+        font-size: 1.2rem;
+        font-weight: map-get($font-weight, "medium");
+      }
+
+      @include sm {
+        margin-top: 1em;
+      }
+    }
+
+    @include sm {
+      width: 100%;
+      display: block;
+      margin: 2em 0;
+    }
+
+    @include md {
+      width: 90%;
+    }
+  }
+
+  .primary-navigation-bar-container {
+    background-color: $clr-black3;
+    margin: $sections-gap auto 0em;
+    color: $clr-white1;
+
+    .navbar-and-menu-dropdown {
+      background-color: $clr-grey2;
+      width: 80%;
+      margin: 0 auto;
+
+      .navbar {
+        display: grid;
+        grid-auto-flow: column;
+        font-weight: map-get($font-weight, "bold");
+
+        .depart-btn {
+          position: relative;
+
+          > a {
+            font-size: $sm-fsize;
+            color: $clr-white1;
+            background-color: $clr-grey1;
+            padding: 1.1em 1.6em;
+
+            span {
+              margin-right: 1.4em;
+              margin-left: 0.5em;
+            }
+
+            @include md {
+              padding: 1.1em 0.8em;
+            }
+          }
+
+          .depart-btn-dropdown {
+            position: absolute;
+            z-index: 9999;
+            width: 100%;
+            @include dropdownTransition(hidden, 0, 1em);
+            transition: $transition;
+            box-shadow: $box-shadow-1;
+
+            li > a {
+              padding: 1em 2em;
+              color: $clr-black3;
+              background-color: $clr-white1 !important;
+              font-weight: map-get($font-weight, "light");
+              transition: $transition;
+
+              &:hover {
+                color: $clr-yellow;
+              }
+            }
+          }
+
+          &:hover .depart-btn-dropdown {
+            @include dropdownTransition(visible, 1, 0em);
+          }
+        }
+
+        .depart-btn + ul {
+          @include displayFlex(row, space-between, center, 0rem);
+
+          li {
+            position: relative;
+
+            a {
+              background-color: $clr-black3;
+              color: inherit;
+              font-size: $sm-fsize;
+              padding: 1.1em 2.8em;
+              display: block;
+
+              &:hover {
+                background-color: $clr-yellow;
+                transition: $transition;
+              }
+
+              @include md {
+                padding: 1em 0.9em;
+              }
+              @include lg {
+                padding: 1.1em 1.6em;
+              }
+            }
+          }
+
+          .nav-item-dropdown {
+            position: absolute;
+            z-index: 9999;
+            width: 12.9em;
+            @include dropdownTransition(hidden, 0, 1em);
+            transition: $transition;
+            box-shadow: $box-shadow-1;
+
+            li > a {
+              display: block;
+              padding: 1em 2em;
+            }
+          }
+
+          li:nth-child(3) .nav-item-dropdown {
+            left: -2em;
+            top: 3em;
+          }
+
+          li:nth-child(6) .nav-item-dropdown {
+            left: -4.8em;
+            top: 3em;
+
+            @include md {
+              left: -7.8em;
+            }
+          }
+
+          li:is(:nth-child(3), :nth-child(6)):hover .nav-item-dropdown {
+            @include dropdownTransition(visible, 1, 0em);
+          }
+        }
+
+        @include sm {
+          display: none;
+        }
+
+        @include md {
+        }
+      }
+
+      .menu-dropdown-container {
+        @include displayFlex(column, normal, normal, 0rem);
+
+        input[type="checkbox"] {
+          position: absolute;
+          display: none;
+        }
+
+        label {
+          font-size: $sm-fsize;
+          font-weight: map-get($font-weight, "bold");
+          margin: 0.5em 0.5em 0.5em auto;
+          background-color: $clr-black3;
+          padding: 0.5em 1em;
+          border-radius: $border-radius - 3px;
+          cursor: pointer;
+        }
+
+        .menu-dropdown {
+          margin: 0em 0.5em 0 1em;
+          font-weight: map-get($font-weight, "light");
+          line-height: $line-height + 0.7;
+          font-size: $sm-fsize;
+          height: 0px;
+          visibility: hidden;
+          transition: height 0.5s ease 0s;
+
+          li {
+            > a {
+              padding-left: 1em;
+              color: inherit;
+              display: block;
+              border-radius: $border-radius;
+
+              &:hover {
+                background-color: $clr-white2;
+              }
+            }
+
+            &:is(:nth-child(3), :nth-child(6)) > a {
+              position: relative;
+
+              &::after {
+                content: "";
+                position: absolute;
+                top: 0.7em;
+                margin-left: 0.3em;
+                border: solid;
+                border-color: transparent transparent transparent $clr-white1;
+                border-width: 0.35em 0.7em;
+              }
+            }
+          }
+        }
+
+        input[type="checkbox"]:checked + label + .menu-dropdown {
+          visibility: visible;
+          height: 200px;
+        }
+      }
+
+      @include sm {
+        width: auto;
+      }
+
+      @include md {
+        width: 730px;
+      }
+
+      @include lg {
+        width: 875px;
+      }
+    }
+
+    @include sm {
+      margin-top: 1em;
+    }
+  }
+
+  @include sm {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+// ------------------------- || MAIN
+.main-content {
+  width: 80%;
+  margin: $sections-gap auto 0rem;
+
+  .login-form {
+    @include displayFlex(column, center, center, 2rem);
+    
+    h2 {
+      font-size: $xxl-fsize + 0.2rem;
+    }
+
+    form {
+      width: 50%;
+      @include displayFlex(column, normal, normal, 1.5rem);
+
+      :not(section:nth-child(3)) {
+        @include displayFlex(column, normal, normal, 0.5rem);
+
+        label {
+          font-size: $lg-fsize;
+          color: $clr-grey1;
+          letter-spacing: $letter-spacing;
+        }
+
+        input {
+          @include customInputBox(1px);
+        }
+      }
+
+      section:nth-child(3){
+        @include displayFlex(row,space-between,normal,0rem);
+        input[type='checkbox']{
+            position: absolute;
+            display: none;
+            
+            &:checked + label::before{
+                content: "\2713";
+                color: $clr-black1;
+            }
+        }
+        label{
+            @include displayFlex(row,normal,center,0.5rem);
+            &::before{
+                @include customCheckBox;
+                color: $clr-white1;
+                border: 1px solid $clr-black1;
+            }
+        }
+
+        a{
+            color: $clr-grey1;
+        }
+      }
+
+      .login-btn {
+        input[type="submit"] {
+          @include primary-btn($lg-fsize, $clr-yellow, 1em);
+          letter-spacing: $letter-spacing;
+          font-size: $sm-fsize;
+          font-weight: map-get($font-weight, "bold");
+          cursor: pointer;
+        }
+      }
+
+      .registration-page-link {
+        align-self: center;
+        a {
+          letter-spacing: $letter-spacing;
+          font-size: $sm-fsize;
+          color: $clr-grey1;
+          border-bottom: 1px solid $clr-black1;
+        }
+      }
+      @include sm{
+        width: 100%;
+      }
+    }
+  }
+}
+
+// --------------------- || FOOTER
+.footer-content {
+  background-color: $clr-black1;
+  width: 100%;
+  color: $clr-white2;
+
+  .trusted-brands-container {
+    background-color: $clr-grey1;
+    margin: $sections-gap auto 0em;
+
+    .brands-logo-container {
+      margin: 0 auto;
+      padding: 2em 0em;
+      width: 80%;
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      gap: 3rem;
+
+      @include sm {
+        scroll-snap-type: x mandatory;
+        padding: 2.5em 0;
+        overflow: auto;
+      }
+
+      img {
+        @include sm {
+          scroll-snap-align: start;
+          width: 100px;
+        }
+      }
+
+      @include md {
+        width: 75%;
+        gap: 4rem;
+        overflow-x: auto;
+        max-width: 590px;
+      }
+      @include sm {
+        width: 90%;
+      }
+    }
+  }
+
+  .inner-content {
+    margin: 0em auto;
+    width: 80%;
+    @include displayFlex(row, space-between, flex-start, 0rem);
+    padding: 5em 0em;
+
+    a {
+      color: $clr-grey4;
+    }
+
+    li {
+      color: $clr-grey4;
+      line-height: $line-height + 0.3;
+
+      h5 {
+        color: $clr-white1;
+        font-size: $default-fsize;
+        letter-spacing: $letter-spacing;
+        margin-bottom: 1em;
+      }
+    }
+
+    .logo-column {
+      > li:first-child {
+        margin-bottom: 1em;
+      }
+
+      .footer-social {
+        @include displayFlex(row, left, center, 0.5rem);
+        margin-top: 1.5em;
+        li {
+          a {
+            i {
+              padding: 0.7em;
+              font-size: $default-fsize;
+              border-radius: $border-radius-circular;
+              background-color: $clr-grey1;
+              color: $clr-white1;
+              transition: $transition;
+              &:hover {
+                background-color: $clr-yellow;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .newsletter-column {
+      li:last-child {
+        margin-top: 1.5em;
+        position: relative;
+
+        form {
+          > input[type="email"] {
+            @include formReset;
+            padding: 1em 1.5em;
+            width: 100%;
+
+            &::-webkit-input-placeholder {
+              color: $clr-grey4;
+            }
+          }
+
+          input[type="submit"] {
+            @include formReset;
+            position: absolute;
+            right: 0em;
+            cursor: pointer;
+            padding: 1em;
+            color: $clr-white1;
+            background-color: $clr-yellow;
+
+            @include sm {
+              right: 0;
+              top: 0em;
+            }
+          }
+        }
+      }
+      @include md {
+        width: 100%;
+      }
+
+      @include lg {
+        width: 30%;
+      }
+    }
+
+    @include sm {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    @include md {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    @include lg {
+      width: 90%;
+    }
+  }
+}

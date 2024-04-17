@@ -1,0 +1,230 @@
+@use "typography" as *;
+@use "colors" as *;
+@use "layout" as *;
+@use "transition" as *;
+@use "breakpoints" as *;
+
+/* FLEX-BOX SNIPPIT */
+@mixin displayFlex($f-direction, $x-adjust, $y-adjust, $gap) {
+  display: flex;
+  flex-direction: $f-direction;
+  justify-content: $x-adjust;
+  align-items: $y-adjust;
+  gap: $gap;
+}
+
+/* DROPDOWN SNIPPIT */
+@mixin dropdownTransition($visi, $opc, $transY: initial) {
+  visibility: $visi;
+  opacity: $opc;
+  transform: translateY($transY);
+}
+
+/* BUTTON LINK SNIPPIT */
+@mixin primary-btn($font-size, $bg-color, $padding) {
+  font-size: $font-size;
+  background-color: $bg-color;
+  color: $clr-white1;
+  padding: $padding;
+}
+
+/* CLOTHING NAVIGATION BAR */
+@mixin clothNavbar {
+  @include displayFlex(row, center, center, 1rem);
+  flex-wrap: wrap;
+  font-size: $xl-fsize - 0.3rem;
+  letter-spacing: $letter-spacing;
+
+  li:first-child a {
+    color: $clr-black2;
+    border-bottom: 2px solid $clr-black2;
+    padding-bottom: 0.3em;
+  }
+
+  li:not(:first-child) a {
+    color: $clr-grey3;
+  }
+}
+
+/* CLOTHES CARD */
+@mixin clothCards {
+  color: $clr-black1;
+  scroll-snap-align: center;
+
+  .cloth-info {
+    margin-top: 0.7em;
+    text-align: center;
+
+    @include sm{
+      font-size: $xl-fsize;
+    }
+  }
+
+  .cloth-image {
+    position: relative;
+    img {
+      width: 15em;
+
+      @include sm{
+        width: 100%;
+      }
+    }
+    .sale {
+      position: absolute;
+      top: 2em;
+      left: 0;
+      background: $clr-green;
+      color: white;
+      padding: 0.6em;
+      font-size: $xs-fsize;
+    }
+
+   
+  }
+
+  .cloth-brand {
+    > h5 {
+      font-size: $xs-fsize;
+      letter-spacing: $letter-spacing + 1px;
+      color: $clr-grey3;
+      @include sm{
+        font-size: $lg-fsize;
+      }
+    }
+  }
+
+  .cloth-name {
+    > h4 {
+      letter-spacing: $letter-spacing;
+      font-weight: map-get($font-weight, "light");
+    }
+  }
+
+  .cloth-price {
+    span {
+      font-weight: map-get($font-weight, "medium");
+      color: $clr-yellow;
+      font-size: $lg-fsize;
+    }
+    s {
+      font-size: $sm-fsize;
+      color: $clr-grey3;
+      @include sm{
+        font-size: $lg-fsize;
+      }
+    }
+  }
+  
+  &::before,&::after{
+    visibility: hidden;
+    opacity: 0;
+    cursor: pointer;
+    transition: $transition;
+  }
+
+  &::before{
+    content: '\2661';
+    font-size: 2rem;
+    position: absolute;
+    background-color: transparent;
+    z-index: 200;
+    top: 0;
+    right: 0.4em;
+    transform: translateY(-40px);
+  }
+  &::after{
+    content: '+ Quick View';
+    font-size: 1rem;
+    font-weight: map-get($font-weight, "bold");
+    background-color: $clr-white1;
+    padding: 0.8em 1.5em;
+    position: absolute;
+    bottom: 12%;
+    left: 20%;
+  }
+
+  &:hover::before{
+    transform: translateY(10px);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  &:hover::after{
+    bottom: 23%;
+    opacity: 1;
+    visibility: visible;
+  }
+
+}
+
+/* ANY GENDER TALL IMAGE */
+@mixin tallPersonImage($image-url) {
+  background: $image-url center;
+  background-size: cover;
+  text-align: center;
+  padding-top: 40em;
+}
+
+/* TEXT WRITTEN INSIDE IMAGE */
+@mixin tallPersonInnerText {
+  color: $clr-white1;
+  letter-spacing: $letter-spacing;
+
+  h2 {
+    font-size: $xxl-fsize + 1rem;
+  }
+
+  a {
+    color: inherit;
+    font-size: $sm-fsize;
+    padding-bottom: 0.3em;
+    border-bottom: 2px solid $clr-white1;
+    display: inline;
+  }
+}
+
+/* RESET FORM */
+@mixin formReset {
+  border: 0;
+  outline: 0;
+}
+
+@mixin customTextArea {
+  padding: 1em 0em 0em 1em;
+  outline: 0;
+  border: $border;
+  border-radius: $border-radius - 3;
+  font-size: $default-fsize;
+
+  &::-webkit-input-placeholder {
+    font-size: $sm-fsize;
+    letter-spacing: $letter-spacing;
+    font-family: sans-serif;
+  }
+}
+
+@mixin customInputBox($border-width){
+  padding: 0.8em 1em;
+  border: $border;
+  border-width: $border-width;
+  border-radius: $border-radius - 3;
+  font-size: $default-fsize;
+  color: $clr-grey3;
+  outline: 0;
+
+  &::-webkit-input-placeholder {
+    font-size: $sm-fsize;
+    letter-spacing: $letter-spacing;
+  }
+}
+
+@mixin customCheckBox{
+  @include displayFlex(row,normal,center,1rem);
+  border: 2px solid $clr-grey3;
+  border-radius: 3px;
+  content: '';
+  width: 0.7em;
+  height: 0.7em;
+  color: $clr-white1;
+  font-weight: map-get($font-weight, "bold");
+}

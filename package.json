@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@splidejs/splide": "^4.1.4",
+    "animate.css": "^4.1.1",
+    "include-media": "^2.0.0"
+  }
+}

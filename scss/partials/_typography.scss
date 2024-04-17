@@ -1,0 +1,21 @@
+
+/* FONT SIZES */
+$herotext-fsize : 4rem;
+$xs-fsize : 0.7rem;
+$sm-fsize : 0.9rem;
+$default-fsize : 1rem;
+$lg-fsize : 1.125rem;
+$xl-fsize : 1.5rem;
+$xxl-fsize : 2rem;
+
+/* BOLD FONT */
+$font-weight: (
+  "light": 500,
+  "medium": 600,
+  "bold": 700,
+  "extra-bold": 800,
+);
+
+/* TEXT CUSTOMIZATION */
+$letter-spacing: 0.5px;
+$line-height: 1.5;
