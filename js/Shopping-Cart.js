@@ -1,36 +1,12 @@
 // products code
-const items = [
-    {
-        image: '../images/Shopping-Cart/product-1.webp',
-        productName: 'Pure Pineapple',
-        price: '60.00',
-        qty: '1',
-        total: '60.00'
-    },
-
-    {
-        image: '../images/Shopping-Cart/product-2.webp',
-        productName: 'American lobster',
-        price: '60.00',
-        qty: '1',
-        total: '60.00'
-    },
-
-    {
-        image: '../images/Shopping-Cart/product-3.webp',
-        productName: 'Guangzhou sweater',
-        price: '60.00',
-        qty: '1',
-        total: '60.00'
-    },
-];
-
 let clutter = '';
+let retrieveItems = sessionStorage.getItem('items'); // retrieving items array from sessionStorage
+retrieveItems = JSON.parse(retrieveItems);
 
-items.forEach((item, index) => {
+retrieveItems.forEach((item, index) => {
     clutter +=
-        `<tr class='product'>
-    <td><img src="${item.image}" alt="product-${index + 1}"></td>
+        `<tr class='product' id="product-${index+1}">
+    <td><img src="${item.image}" alt="product-${index+1}"></td>
     <td><h5>${item.productName}</h5></td>
     <td class="item-price">$${item.price}</td>
     <td class="qty">
@@ -46,10 +22,9 @@ items.forEach((item, index) => {
     </td>
     </tr>
     `
-})
+});
 
 document.querySelector('.products-table tbody').innerHTML = clutter;
-// ------- end
 
 let productContainer = document.querySelectorAll('.qty');
 let qty = document.querySelectorAll('.qty span');
@@ -57,6 +32,28 @@ let total = document.querySelectorAll('.total-products-price');
 let price = document.querySelectorAll('.item-price');
 let subTotal = document.getElementById('sub-total');
 let grandTotal = document.getElementById('grand-total');
+let deleteProduct = document.querySelectorAll('.delete-product-btn');
+
+const calculations = (event, index) => {
+    if (event.target.classList.contains('fa-plus')) {
+        qty[index].innerText++;
+        total[index].innerText = qty[index].innerText * Number.parseFloat(price[index].innerText.slice(1)).toFixed(2); // we did slice(1) so that the currency sign is not included in the calculation.
+        total[index].innerText = '$' + total[index].innerText; // after calculations we again add currency sign
+    }
+
+    else if (event.target.classList.contains('fa-minus') && qty[index].innerText != 1) {
+        qty[index].innerText--;
+        total[index].innerText = qty[index].innerText * Number.parseFloat(price[index].innerText.slice(1)).toFixed(2); // we did slice(1) so that the currency sign is not included in the calculation.
+        total[index].innerText = '$' + total[index].innerText; // after calculations we again add currency sign
+    }
+
+    if (qty[index].innerText != 1 && (event.target.classList.contains('fa-plus') || event.target.classList.contains('fa-minus'))) {
+        // after we increment or decrement, add the currency sign with (sub-total) and (grand-total)
+        subTotal.innerText = '$' + calculateGrandTotal(total);
+        grandTotal.innerText = subTotal.innerText;
+    }// this if statement is important to avoid any unusual behavior or change of grand and sub total amount when click anything beside + or -
+
+}
 
 // calculates grand-total
 const calculateGrandTotal = (total) => {
@@ -67,6 +64,7 @@ const calculateGrandTotal = (total) => {
     // 5- finally, returning the total of each product.
 
     // NOTE: didn't use reduce method since it was giving error due to slice() becuz slice() is used on string and reduce is only for arrays
+
     let value = 0;
     Array.from(total).forEach((eachProductTotal) => {
         value += Number.parseFloat(eachProductTotal.innerText.slice(1));
@@ -81,22 +79,27 @@ grandTotal.innerText = subTotal.innerText; // will show same as sub-total
 productContainer.forEach((eachProduct, index) => {
     eachProduct.addEventListener('click', (event) => {
 
-        if (event.target.classList.contains('fa-plus')) {
-            qty[index].innerText++;
-            total[index].innerText = qty[index].innerText * Number.parseFloat(price[index].innerText.slice(1)).toFixed(2); // we did slice(1) so that the currency sign is not included in the calculation.
-            total[index].innerText = '$' + total[index].innerText; // after calculations we again add currency sign
-        }
-
-        else if (event.target.classList.contains('fa-minus') && qty[index].innerText > 0) {
-            qty[index].innerText--;
-            total[index].innerText = qty[index].innerText * Number.parseFloat(price[index].innerText.slice(1)).toFixed(2); // we did slice(1) so that the currency sign is not included in the calculation.
-            total[index].innerText = '$' + total[index].innerText; // after calculations we again add currency sign
-        }
-        
-        if (qty[index].innerText > 0 && (event.target.classList.contains('fa-plus') || event.target.classList.contains('fa-minus'))) {
-            // after we increment or decrement, add the currency sign with (sub-total) and (grand-total)
-            subTotal.innerText = '$' + calculateGrandTotal(total);
-            grandTotal.innerText = subTotal.innerText;
-        }// this if statement is important to avoid any unusual behavior or change of grand and sub total amount when click anything beside + or -
+        calculations(event, index);
     });
 });
+
+// ------- to remove an item from cart
+deleteProduct.forEach(delBtn => {
+    delBtn.addEventListener('click', (e) => {
+        let parentElement = e.target.parentElement;
+        while (!parentElement.classList.contains('product')) {
+            parentElement = parentElement.parentElement;
+        }
+
+       retrieveItems = retrieveItems.filter(item=>{
+            if(item.productID === parentElement.getAttribute('id')){
+                parentElement.remove();
+            }
+            else{
+                return item;
+            }
+        })
+        sessionStorage.setItem('items', JSON.stringify(retrieveItems));
+    })
+})
+// ------- end

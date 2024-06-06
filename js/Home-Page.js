@@ -1,5 +1,4 @@
 let timeboxContainer = document.querySelector('.time-container');
-console.log(timeboxContainer.lastElementChild);
 let secondBox = document.querySelector('.secondBox');
 let minuteBox = document.querySelector('.minuteBox');
 let hourBox = document.querySelector('.hourBox');

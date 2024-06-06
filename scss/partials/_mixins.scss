@@ -79,7 +79,48 @@
       font-size: $xs-fsize;
     }
 
-   
+    &::before,&::after{
+      visibility: hidden;
+      opacity: 0;
+      cursor: pointer;
+      transition: $transition;
+    }
+  
+    &::before{
+      content: '\2661';
+      font-size: 2rem;
+      position: absolute;
+      background-color: transparent;
+      z-index: 200;
+      top: 0;
+      right: 0.4em;
+      transform: translateY(-40px);
+    }
+    &::after{
+      content: '+ Quick View';
+      width: 50%;
+      font-size: 1rem;
+      font-weight: map-get($font-weight, "bold");
+      background-color: $clr-white1;
+      padding: 0.8em 1.5em;
+      position: absolute;
+      bottom: -12%;
+      left: 50%;
+      transform: translate(-50%, -1%);
+    }
+    
+    &:hover::before{
+      transform: translateY(10px);
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    &:hover::after{
+      bottom: 1%;
+      opacity: 1;
+      visibility: visible;
+    }
+
   }
 
   .cloth-brand {
@@ -114,47 +155,16 @@
       }
     }
   }
-  
-  &::before,&::after{
-    visibility: hidden;
-    opacity: 0;
+
+  .buy-btn{
+    text-align: center;
+    width: 100%;
+    background-color: $clr-yellow;
+    padding: 1em 1em;
+    color: $clr-white1;
     cursor: pointer;
-    transition: $transition;
+    margin-top: 0.8em;
   }
-
-  &::before{
-    content: '\2661';
-    font-size: 2rem;
-    position: absolute;
-    background-color: transparent;
-    z-index: 200;
-    top: 0;
-    right: 0.4em;
-    transform: translateY(-40px);
-  }
-  &::after{
-    content: '+ Quick View';
-    font-size: 1rem;
-    font-weight: map-get($font-weight, "bold");
-    background-color: $clr-white1;
-    padding: 0.8em 1.5em;
-    position: absolute;
-    bottom: 12%;
-    left: 20%;
-  }
-
-  &:hover::before{
-    transform: translateY(10px);
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  &:hover::after{
-    bottom: 23%;
-    opacity: 1;
-    visibility: visible;
-  }
-
 }
 
 /* ANY GENDER TALL IMAGE */

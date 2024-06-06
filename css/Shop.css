@@ -834,6 +834,44 @@ body {
   padding: 0.6em;
   font-size: 0.7rem;
 }
+.main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card .cloth-image::before, .main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card .cloth-image::after {
+  visibility: hidden;
+  opacity: 0;
+  cursor: pointer;
+  transition: all 0.25s linear;
+}
+.main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card .cloth-image::before {
+  content: "♡";
+  font-size: 2rem;
+  position: absolute;
+  background-color: transparent;
+  z-index: 200;
+  top: 0;
+  right: 0.4em;
+  transform: translateY(-40px);
+}
+.main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card .cloth-image::after {
+  content: "+ Quick View";
+  width: 50%;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: white;
+  padding: 0.8em 1.5em;
+  position: absolute;
+  bottom: -12%;
+  left: 50%;
+  transform: translate(-50%, -1%);
+}
+.main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card .cloth-image:hover::before {
+  transform: translateY(10px);
+  opacity: 1;
+  visibility: visible;
+}
+.main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card .cloth-image:hover::after {
+  bottom: 1%;
+  opacity: 1;
+  visibility: visible;
+}
 .main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card .cloth-brand > h5 {
   font-size: 0.7rem;
   letter-spacing: 1.5px;
@@ -862,41 +900,14 @@ body {
     font-size: 1.125rem;
   }
 }
-.main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card::before, .main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card::after {
-  visibility: hidden;
-  opacity: 0;
+.main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card .buy-btn {
+  text-align: center;
+  width: 100%;
+  background-color: #e7ab3c;
+  padding: 1em 1em;
+  color: white;
   cursor: pointer;
-  transition: all 0.25s linear;
-}
-.main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card::before {
-  content: "♡";
-  font-size: 2rem;
-  position: absolute;
-  background-color: transparent;
-  z-index: 200;
-  top: 0;
-  right: 0.4em;
-  transform: translateY(-40px);
-}
-.main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card::after {
-  content: "+ Quick View";
-  font-size: 1rem;
-  font-weight: 700;
-  background-color: white;
-  padding: 0.8em 1.5em;
-  position: absolute;
-  bottom: 12%;
-  left: 20%;
-}
-.main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card:hover::before {
-  transform: translateY(10px);
-  opacity: 1;
-  visibility: visible;
-}
-.main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container .cloth-card:hover::after {
-  bottom: 23%;
-  opacity: 1;
-  visibility: visible;
+  margin-top: 0.8em;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .main-content .col-2 .clothing-navbar-and-card-container .clothing-card-container {
